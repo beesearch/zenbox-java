@@ -9,7 +9,7 @@ import fr.zen.entities.ZnUser;
 @Named
 public class HelloDao {
 
-	@PersistenceUnit(unitName = "zendb")
+	@PersistenceUnit
 	EntityManagerFactory emf;
 
 	public String getHelloWorld() {
