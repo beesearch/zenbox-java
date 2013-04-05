@@ -1,23 +1,25 @@
 package fr.zen.entities;
 
 import java.io.Serializable;
-import javax.persistence.*;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * The persistent class for the ZN_USER database table.
  * 
  */
 @Entity
-@Table(name="ZN_USER")
+@SuppressWarnings("serial")
 public class ZnUser implements Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="FIRST_NAME")
+	@GeneratedValue
+	private int id;
+
 	private String firstName;
 
-	@Column(name="LAST_NAME")
 	private String lastName;
 
 	public ZnUser() {

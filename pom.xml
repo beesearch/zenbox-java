@@ -25,14 +25,13 @@
 			<version>4.11</version>
 		</dependency>
 		
-		<!-- Postgre -->
+		<!-- PostgreSQL -->
 		<dependency>
 			<groupId>postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<version>9.1-901.jdbc4</version>
 		</dependency>
-            
-		
+
 	</dependencies>
 	<build>
         <finalName>ZenBox</finalName>
