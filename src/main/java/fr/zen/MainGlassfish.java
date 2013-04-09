@@ -39,16 +39,21 @@ public class MainGlassfish {
 
 			// Récupération des infos de connexion a la base
 			String dbUrl = System.getenv("DATABASE_URL");
-			System.out.println("-------db url: " + dbUrl);
-			Matcher matcher = Pattern.compile("postgres://(.*):(.*)@(.*)/(.*)").matcher(dbUrl);
+			System.out.println("### DATABASE_URL: " + dbUrl);
+			Matcher matcher = Pattern.compile("postgres://(.*):(.*)@(.*):(.*)/(.*)").matcher(dbUrl);
 			matcher.find();
 			String host = matcher.group(3);
-			String database = matcher.group(4);
+			String port = matcher.group(4);
+			String database = matcher.group(5);
 			String user = matcher.group(1);
 			String password = matcher.group(2);
-			String properties = "user=" + user + ":password=" + password + ":databasename=" + database + ":loglevel=4:servername=" + host;
-			System.out.println("-------properties: " + properties);
-			System.out.println("### database properties: " + properties);
+			String properties = "user=" + user + ":password=" + password + ":databasename=" + database + ":servername=" + host + ":portnumber=" + port + ":loglevel=4";
+			System.out.println("### Database properties: " + properties);
+			if (!"localhost".equals(host)) {
+				properties += ":ssl=true:sslfactory=org.postgresql.ssl.NonValidatingFactory";
+				System.out.println("### Remote DB detected!");
+				System.out.println("### New database properties: " + properties);
+			}
 
 			// Creation du pool de connection
 			CommandRunner runner = glassfish.getCommandRunner();
@@ -70,7 +75,7 @@ public class MainGlassfish {
 			// Deploiement de l'archive
 			Deployer deployer = glassfish.getDeployer();
 			deployer.deploy(archive.toURI());
-			System.out.println("### application started :)");
+			System.out.println("### Application started :)");
 
 		} catch (Exception e) {
 			e.printStackTrace();
