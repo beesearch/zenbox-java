@@ -47,7 +47,7 @@ public class MainGlassfish {
 			String database = matcher.group(5);
 			String user = matcher.group(1);
 			String password = matcher.group(2);
-			String properties = "user=" + user + ":password=" + password + ":databasename=" + database + ":servername=" + host + ":portnumber=" + port + ":loglevel=4";
+			String properties = "user=" + user + ":password=" + password + ":databasename=" + database + ":servername=" + host + ":portnumber=" + port; //+ ":loglevel=4";
 			System.out.println("### Database properties: " + properties);
 			if (!"localhost".equals(host)) {
 				properties += ":ssl=true:sslfactory=org.postgresql.ssl.NonValidatingFactory";
