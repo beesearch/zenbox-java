@@ -18,7 +18,7 @@ public class ZnUser {
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 
 	//@NotNull
 	//@Size(min = 3, max = 15)
@@ -38,14 +38,14 @@ public class ZnUser {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

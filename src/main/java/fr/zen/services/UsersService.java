@@ -41,16 +41,19 @@ public class UsersService {
     @GET
     public List<ZnUser> list(@QueryParam("first") @DefaultValue("0") int first,
                            @QueryParam("max") @DefaultValue("20") int max) {
-    	System.out.println("### GET Users List (first:" + first + ", max:" + max + ")");
+    	System.out.println("### GET users list (first:" + first + ", max:" + max + ")");
     	List<ZnUser> users = dao.list(first, max);
-    	System.out.println("### GET Users List (response:" + users + ")");
+    	System.out.println("### GET users list (response:" + users + ")");
         return users;
     }
 
     @Path("/show/{id}")
     @GET
     public ZnUser show(@PathParam("id") long id) {
-        return dao.find(id);
+    	System.out.println("### GET user show (id:" + id + ")");
+        ZnUser user = dao.find(id);
+        System.out.println("### GET user show (response:" + user + ")");
+        return user;
     }
 
     @Path("/delete/{id}")
