@@ -13,13 +13,8 @@ public class ZnUsersDao {
 	@Inject
     private DAO dao;
 
-    public ZnUser create(String firstName, String lastName, String pwd, String mail) {
-        ZnUser ZnUser = new ZnUser();
-        ZnUser.setFirstName(firstName);
-        ZnUser.setLastName(lastName);
-        ZnUser.setPassword(pwd);
-        ZnUser.setEmail(mail);
-        return dao.create(ZnUser);
+    public ZnUser create(ZnUser user) {
+        return dao.create(user);
     }
 
     public List<ZnUser> list(int first, int max) {
@@ -34,17 +29,13 @@ public class ZnUsersDao {
         dao.delete(ZnUser.class, id);
     }
 
-    public ZnUser update(long id, String firstName, String lastName, String pwd, String mail) {
-        ZnUser ZnUser = dao.find(ZnUser.class, id);
+    public ZnUser update(ZnUser user) {
+        ZnUser ZnUser = dao.find(ZnUser.class, user.getId());
         if (ZnUser == null) {
-            throw new IllegalArgumentException("setZnUser id " + id + " not found");
+            throw new IllegalArgumentException("setZnUser id " + user.getId() + " not found");
         }
 
-        ZnUser.setFirstName(firstName);
-        ZnUser.setLastName(lastName);
-        ZnUser.setPassword(pwd);
-        ZnUser.setEmail(mail);
-        return dao.update(ZnUser);
+        return dao.update(user);
     }
 
 }

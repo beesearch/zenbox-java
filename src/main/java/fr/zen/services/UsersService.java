@@ -27,17 +27,7 @@ public class UsersService {
 	@Inject
     private ZnUsersDao dao;
 
-    @Path("/create")
-    @PUT
-    public ZnUser create(@QueryParam("firstname") String firstname,
-                       @QueryParam("lastname") String lastname,
-                       @QueryParam("pwd") String pwd,
-                       @QueryParam("mail") String mail) {
-        return dao.create(firstname, lastname, pwd, mail);
-    }
-
     @Path("/list")
-    @Consumes(MediaType.APPLICATION_JSON)
     @GET
     public List<ZnUser> list(@QueryParam("first") @DefaultValue("0") int first,
                            @QueryParam("max") @DefaultValue("20") int max) {
@@ -56,20 +46,27 @@ public class UsersService {
         return user;
     }
 
-    @Path("/delete/{id}")
-    @DELETE
-    public void delete(@PathParam("id") long id) {
-        dao.delete(id);
+    @Path("/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @PUT
+    public ZnUser create(ZnUser user) {
+    	System.out.println("### PUT users create (user:" + user + ")");
+        return dao.create(user);
     }
 
     @Path("/update/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
     @POST
-    public ZnUser update(@PathParam("id") long id,
-    		           @QueryParam("firstname") String firstname,
-                       @QueryParam("lastname") String lastname,
-                       @QueryParam("pwd") String pwd,
-                       @QueryParam("mail") String mail) {
-        return dao.update(id, firstname, lastname, pwd, mail);
+    public ZnUser update(ZnUser user) {
+    	System.out.println("### POST users update (user:" + user + ")");
+        return dao.update(user);
+    }
+
+    @Path("/delete/{id}")
+    @DELETE
+    public void delete(@PathParam("id") long id) {
+    	System.out.println("### DELETE users delete (id:" + id + ")");
+        dao.delete(id);
     }
 
 }

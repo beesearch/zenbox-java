@@ -105,4 +105,9 @@ public class ZnUser {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "ZnUser [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", password=" + password + ", email=" + email + "]";
+	}
+
 }
