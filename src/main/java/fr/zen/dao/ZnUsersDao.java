@@ -32,7 +32,7 @@ public class ZnUsersDao {
     public ZnUser update(ZnUser user) {
         ZnUser ZnUser = dao.find(ZnUser.class, user.getId());
         if (ZnUser == null) {
-            throw new IllegalArgumentException("setZnUser id " + user.getId() + " not found");
+            throw new IllegalArgumentException("ZnUser id " + user.getId() + " not found");
         }
 
         return dao.update(user);
