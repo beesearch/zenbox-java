@@ -22,13 +22,12 @@ public class HTML5CorsFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		System.out.println("###### HTML5CorsFilter.doFilter add HTML5 CORS Headers");
+		System.out.println("###### HTML5CorsFilter.doFilter add HTML5 CORS Headers ...");
 
 		HttpServletResponse res = (HttpServletResponse) response;
 		res.addHeader("Access-Control-Allow-Origin", "*");
 		res.addHeader("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
-		res.addHeader("Access-Control-Allow-Headers", "Content-Type");
-		res.addHeader("Access-Control-Request-Method", "GET");
+		res.addHeader("Access-Control-Allow-Headers", "Content-Type, X-Requested-With");
 		chain.doFilter(request, response);
 	}
 
