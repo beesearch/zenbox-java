@@ -25,48 +25,47 @@ import fr.zen.entities.ZnUser;
 public class UsersService {
 
 	@Inject
-    private ZnUsersDao dao;
+	private ZnUsersDao dao;
 
-    @Path("/list")
-    @GET
-    public List<ZnUser> list(@QueryParam("first") @DefaultValue("0") int first,
-                           @QueryParam("max") @DefaultValue("20") int max) {
-    	System.out.println("### GET users list (first:" + first + ", max:" + max + ")");
-    	List<ZnUser> users = dao.list(first, max);
-    	System.out.println("### GET users list (response:" + users + ")");
-        return users;
-    }
+	@Path("/list")
+	@GET
+	public List<ZnUser> list(@QueryParam("search") @DefaultValue("%") String search, @QueryParam("first") @DefaultValue("0") int first, @QueryParam("max") @DefaultValue("20") int max) {
+		System.out.println("### GET users list (search:" + search + ", first:" + first + ", max:" + max + ")");
+		List<ZnUser> users = dao.list(search, first, max);
+		System.out.println("### GET users list (response:" + users + ")");
+		return users;
+	}
 
-    @Path("/show/{id}")
-    @GET
-    public ZnUser show(@PathParam("id") long id) {
-    	System.out.println("### GET user show (id:" + id + ")");
-        ZnUser user = dao.find(id);
-        System.out.println("### GET user show (response:" + user + ")");
-        return user;
-    }
+	@Path("/show/{id}")
+	@GET
+	public ZnUser show(@PathParam("id") long id) {
+		System.out.println("### GET user show (id:" + id + ")");
+		ZnUser user = dao.find(id);
+		System.out.println("### GET user show (response:" + user + ")");
+		return user;
+	}
 
-    @Path("/create")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @PUT
-    public ZnUser create(ZnUser user) {
-    	System.out.println("### PUT users create (user:" + user + ")");
-        return dao.create(user);
-    }
+	@Path("/create")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@PUT
+	public ZnUser create(ZnUser user) {
+		System.out.println("### PUT users create (user:" + user + ")");
+		return dao.create(user);
+	}
 
-    @Path("/update/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @POST
-    public ZnUser update(ZnUser user) {
-    	System.out.println("### POST users update (user:" + user + ")");
-        return dao.update(user);
-    }
+	@Path("/update/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@POST
+	public ZnUser update(ZnUser user) {
+		System.out.println("### POST users update (user:" + user + ")");
+		return dao.update(user);
+	}
 
-    @Path("/delete/{id}")
-    @DELETE
-    public void delete(@PathParam("id") long id) {
-    	System.out.println("### DELETE users delete (id:" + id + ")");
-        dao.delete(id);
-    }
+	@Path("/delete/{id}")
+	@DELETE
+	public void delete(@PathParam("id") long id) {
+		System.out.println("### DELETE users delete (id:" + id + ")");
+		dao.delete(id);
+	}
 
 }
